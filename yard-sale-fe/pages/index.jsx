@@ -1,7 +1,7 @@
 import client from "../client";
+import Listing from "../components/listing";
 
 const Index = ({ listings }) => {
-  console.log(listings);
   return (
     <div>
       <h1>Hello world!</h1>
@@ -10,11 +10,7 @@ const Index = ({ listings }) => {
           listings.map((listing, i) => {
             return (
               <li key={i}>
-                <h3>{listing.title}</h3>
-                {listing.categories.length > 0 &&
-                  listing.categories.map((category, i) => {
-                    return <span key={i}>{category.title}</span>;
-                  })}
+                <Listing data={listing} />
               </li>
             );
           })}
@@ -25,13 +21,16 @@ const Index = ({ listings }) => {
 
 export async function getStaticProps() {
   const listings = await client.fetch(
-    `*[_type == 'product']{
+    `*[_type == 'product'] {
       title,
       categories[] -> {
         title,
         'slug':slug.current
-},
-    'slug':slug.current,
+      },
+     'slug': slug.current,
+      defaultProductVariant {
+        images
+      },
     }`
   );
   return {
