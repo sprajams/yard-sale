@@ -1,15 +1,18 @@
+import styles from "./styles.module.scss";
+
 const Listing = ({ data }) => {
-  console.log(data);
+  const { title, categories, location, image } = data;
   return (
-    <div>
-      <h3>{data.title}</h3>
-      <ul>
-        Categories
-        {data.categories.length > 0 &&
-          data.categories.map((category, i) => {
-            return <li key={i}>{category.title}</li>;
-          })}
-      </ul>
+    <div className={styles.outer}>
+      <div className={styles.imgWrap}>
+        <img className={styles.img} src={image} alt="product" />
+      </div>
+      <div className={styles.infoWrap}>
+        <h3>{title}</h3>
+        <span className={styles.infoSmall}>
+          {location.city}, {location.state}
+        </span>
+      </div>
     </div>
   );
 };
