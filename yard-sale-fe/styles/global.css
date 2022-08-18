@@ -71,3 +71,10 @@ h6 {
   font-family: "Ubuntu", sans-serif;
   letter-spacing: 0.04rem;
 }
+
+:root {
+  --primary: rgb(15, 12, 19);
+  --secondary: rgb(113, 74, 64);
+  --lightText: rgb(118, 104, 97);
+  --bg-color: rgb(230, 225, 222);
+}
