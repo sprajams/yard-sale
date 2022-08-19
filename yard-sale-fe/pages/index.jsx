@@ -1,11 +1,12 @@
 import client from "../client";
-import Listing from "../components/listing";
+import Hero from "../components/Hero";
+import Listing from "../components/Listing";
 import utils from "../styles/utils.module.scss";
 
-const Index = ({ listings }) => {
+const Index = ({ listings, locations }) => {
   return (
     <div>
-      <h1>Hello world!</h1>
+      <Hero locationData={locations} />
       <ul className={utils.grid}>
         {listings.length > 0 &&
           listings.map((listing, i) => {
@@ -37,9 +38,18 @@ export async function getStaticProps() {
       'image': images[0].asset->url
     }`
   );
+
+  const locations = await client.fetch(
+    `*[_type == 'location'] {
+        city,
+        state,
+       'slug':slug.current
+    }`
+  );
   return {
     props: {
       listings,
+      locations,
     },
   };
 }
