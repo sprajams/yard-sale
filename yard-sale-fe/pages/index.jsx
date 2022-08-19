@@ -5,7 +5,7 @@ import utils from "../styles/utils.module.scss";
 
 const Index = ({ listings, locations }) => {
   return (
-    <div>
+    <div className={utils.outer}>
       <Hero locationData={locations} />
       <ul className={utils.grid}>
         {listings.length > 0 &&
