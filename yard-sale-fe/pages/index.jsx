@@ -4,7 +4,7 @@ import Listing from "../components/Listing";
 import utils from "../styles/utils.module.scss";
 
 const Index = ({ listings, locations }) => {
-  console.log(listings, locations);
+  // console.log(listings, locations);
   return (
     <div className={utils.outer}>
       <Hero locationData={locations} />
@@ -22,7 +22,9 @@ const Index = ({ listings, locations }) => {
   );
 };
 
-export async function getStaticProps() {
+export async function getServerSideProps(context) {
+  console.log("queryyy", context.query);
+
   const listings = await client.fetch(
     `*[_type == 'product'] | order(_updatedAt desc) {
       title,

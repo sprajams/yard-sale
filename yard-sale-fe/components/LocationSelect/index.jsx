@@ -1,14 +1,28 @@
-import { useState } from "react";
-import Link from "next/link";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import styles from "./styles.module.scss";
 
 const LocationSelect = ({ locationData }) => {
-  const [location, setLocation] = useState("Los Angeles");
+  const router = useRouter();
+
+  // if there is no query, make la the default
+  useEffect(() => {
+    if (!router.query.location) {
+      router.push({
+        pathname: router.pathname,
+        query: { location: "los-angeles" },
+      });
+    }
+  }, []);
+  // user selection updates the query in the url
   const handleChange = (e) => {
-    setLocation(e.target.value);
+    router.replace({
+      pathname: router.pathname,
+      query: { location: e.target.value },
+    });
   };
 
   return (
@@ -16,7 +30,7 @@ const LocationSelect = ({ locationData }) => {
       <h1 className={styles.prefixText}>Browsing local yard sales in</h1>
       <FormControl style={{ margin: "0", padding: "0" }} variant="standard">
         <Select
-          value={location}
+          value={router.query.location || "los-angeles"}
           onChange={handleChange}
           displayEmpty
           inputProps={{ "aria-label": "Without label" }}
@@ -29,15 +43,14 @@ const LocationSelect = ({ locationData }) => {
               return (
                 <MenuItem
                   key={i}
-                  value={location.city}
+                  value={location.slug}
                   style={{ padding: "0" }}
                 >
                   {/* TODO: change href to link to postings from that location */}
-                  <Link href={`/`}>
-                    <a className={styles.locationLink}>
-                      {location.city}, {location.state}
-                    </a>
-                  </Link>
+
+                  <a className={styles.locationLink}>
+                    {location.city}, {location.state}
+                  </a>
                 </MenuItem>
               );
             })}
