@@ -18,6 +18,11 @@ export default {
       },
     },
     {
+      name: "price",
+      title: "Price ($USD)",
+      type: "number",
+    },
+    {
       title: "Tags",
       name: "tags",
       type: "array",
