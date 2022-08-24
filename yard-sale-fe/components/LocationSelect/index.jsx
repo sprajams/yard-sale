@@ -8,15 +8,6 @@ import styles from "./styles.module.scss";
 const LocationSelect = ({ locationData }) => {
   const router = useRouter();
 
-  // if there is no query, make la the default
-  useEffect(() => {
-    if (!router.query.location) {
-      router.push({
-        pathname: router.pathname,
-        query: { location: "los-angeles" },
-      });
-    }
-  }, []);
   // user selection updates the query in the url
   const handleChange = (e) => {
     router.replace({
