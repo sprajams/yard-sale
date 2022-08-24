@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useRouter } from "next/router";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -7,12 +6,11 @@ import styles from "./styles.module.scss";
 
 const LocationSelect = ({ locationData }) => {
   const router = useRouter();
-
   // user selection updates the query in the url
   const handleChange = (e) => {
-    router.replace({
+    router.push({
       pathname: router.pathname,
-      query: { location: e.target.value },
+      query: { location: e.target.value, ...router.query },
     });
   };
 

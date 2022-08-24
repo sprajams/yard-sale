@@ -1,25 +1,5 @@
 import client from "../client";
-import Hero from "../components/Hero";
-import Listing from "../components/Listing";
-import utils from "../styles/utils.module.scss";
-
-const Index = ({ listings, locations }) => {
-  return (
-    <div className={utils.outer}>
-      <Hero locationData={locations} />
-      <ul className={utils.grid}>
-        {listings.length > 0 &&
-          listings.map((listing, i) => {
-            return (
-              <li key={i}>
-                <Listing data={listing} />
-              </li>
-            );
-          })}
-      </ul>
-    </div>
-  );
-};
+import Homepage from "../layout/Homepage";
 
 export async function getServerSideProps(context) {
   // nullish coalescing operator default to la if query is undefined
@@ -51,11 +31,19 @@ export async function getServerSideProps(context) {
        'slug':slug.current
     }`
   );
+
+  const categories = await client.fetch(
+    `*[_type == 'category'] {
+      title,
+      slug
+    }`
+  );
   return {
     props: {
       listings,
       locations,
+      categories,
     },
   };
 }
-export default Index;
+export default Homepage;
