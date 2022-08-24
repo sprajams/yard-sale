@@ -2,7 +2,6 @@ import Link from "next/link";
 import styles from "./styles.module.scss";
 
 const Listing = ({ data }) => {
-  console.log(data);
   const { title, location, image, slug, price, updatedTime } = data;
   return (
     //clicking on a listing tile will link to PDP with the correct route
