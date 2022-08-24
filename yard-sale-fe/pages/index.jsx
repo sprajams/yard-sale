@@ -38,7 +38,9 @@ export async function getServerSideProps(context) {
         state,
        'slug':slug.current
       },
-      'image': images[0].asset->url
+      price,
+      'image': images[0].asset->url,
+      'updatedTime': _updatedAt
     }`
   );
 
