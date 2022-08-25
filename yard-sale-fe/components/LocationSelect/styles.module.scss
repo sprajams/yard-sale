@@ -1,9 +1,7 @@
 .locationLink {
-  color: RGB(210, 193, 177);
   list-style: none;
-  text-align: center;
-  width: 100%;
-  font-size: 1.5rem;
+  padding: 8px;
+  font-size: 2rem;
   color: var(--lightText);
   text-decoration: none;
   width: 100%;
@@ -11,10 +9,8 @@
   font-family: "ubuntu";
 }
 .selectedLocation {
-  font-family: "ubuntu";
   font-weight: 600;
-  font-size: 2.4rem;
-  padding: 0;
+  line-height: 64.2px;
   & a {
     font-size: 2.4rem;
     padding: 0;
@@ -24,13 +20,16 @@
     }
   }
   @media (min-width: 768px) {
-    font-size: 3.5rem;
+    line-height: 89.5px;
   }
 }
 
 .prefixText {
   font-size: 2.7rem;
+  display: inline;
+  line-height: 64.2px;
   @media (min-width: 768px) {
     font-size: 3.5rem;
+    line-height: 89.5px;
   }
 }

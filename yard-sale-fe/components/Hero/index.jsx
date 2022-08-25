@@ -4,10 +4,8 @@ import LocationSelect from "../LocationSelect";
 const Hero = ({ locationData }) => {
   return (
     <div className={styles.outer}>
-      <div className={styles.inner}>
-        <div className={styles.main}>
-          <LocationSelect locationData={locationData} />
-        </div>
+      <div className={styles.main}>
+        <LocationSelect locationData={locationData} />
       </div>
     </div>
   );

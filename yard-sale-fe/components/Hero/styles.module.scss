@@ -1,13 +1,10 @@
 .main {
-  font-size: 1.1rem;
-  @media (min-width: 768px) {
-    padding: 20px;
-  }
+  margin: 0 auto;
+  max-width: 650px;
 }
 .outer {
   padding: 48px 24px;
-}
-.inner {
-  margin: 0 auto;
-  max-width: 650px;
+  @media (min-width: 768px) {
+    min-height: 375px;
+  }
 }

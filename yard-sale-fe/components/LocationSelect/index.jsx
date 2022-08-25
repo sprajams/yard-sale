@@ -22,10 +22,16 @@ const LocationSelect = ({ locationData }) => {
 
   return (
     <div className={styles.outer}>
+      {/* TODO: make h1 and select inline */}
       <h1 className={styles.prefixText}>
-        Browsing local yard sales {locationAllOrEmpty ? "" : "in"}
+        Browsing local yard&nbsp;sales{" "}
+        {locationAllOrEmpty ? "" : <span>in </span>}
       </h1>
-      <FormControl style={{ margin: "0", padding: "0" }} variant="standard">
+
+      <FormControl
+        style={{ margin: "0", padding: "0", display: "inline" }}
+        variant="standard"
+      >
         <Select
           value={router.query.location || "all"}
           onChange={handleChange}
@@ -36,7 +42,7 @@ const LocationSelect = ({ locationData }) => {
           style={{ margin: "0", padding: "0" }}
         >
           <MenuItem value={"all"} style={{ padding: "0" }}>
-            <a className={styles.locationLink}>Everywhere</a>
+            <a className={styles.locationLink}>everywhere</a>
           </MenuItem>
           {locationData.length > 0 &&
             locationData.map((location, i) => {
