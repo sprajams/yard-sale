@@ -2,11 +2,20 @@ import client from "../client";
 import Homepage from "../layout/Homepage";
 
 export async function getServerSideProps(context) {
-  // nullish coalescing operator default to la if query is undefined
-  const location = context.query.location ?? "los-angeles";
+  //  assign locationFilter the query to filter for posts if a location is defined
+  const location = context.query.location;
+  const locationFilter = location
+    ? `&& location[0]->slug.current == "${location}"`
+    : "";
+
+  //  query to filter by category if one is selected
+  const category = context.query.category;
+  const categoryFilter = category
+    ? `&& "${category}" in categories[] -> slug.current`
+    : "";
 
   const listings = await client.fetch(
-    `*[_type == 'product' && location[0]->slug.current == "${location}" ] | order(_updatedAt desc) {
+    `*[_type == 'product' ${locationFilter} ${categoryFilter}] | order(_updatedAt desc) {
       title,
       categories[] -> {
         title,
