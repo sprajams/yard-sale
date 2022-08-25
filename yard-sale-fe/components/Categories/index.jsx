@@ -4,12 +4,20 @@ const Categories = ({ data }) => {
   const router = useRouter();
   // user selection updates the query in the url
   const handleChange = (e) => {
-    console.log(router);
-    router.push({
-      pathname: router.pathname,
-      query: { ...router.query, category: e.target.value },
-    });
+    if (router.isReady && router.asPath.includes(e.target.value)) {
+      //TODO: if category is already selected and selected again, category is untoggled by making it undefined. Can we remove category entirely?
+      router.push({
+        pathname: router.pathname,
+        query: { ...router.query, category: undefined },
+      });
+    } else {
+      router.push({
+        pathname: router.pathname,
+        query: { ...router.query, category: e.target.value },
+      });
+    }
   };
+
   return (
     <div>
       <h2>All categories</h2>

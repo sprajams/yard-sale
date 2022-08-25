@@ -10,7 +10,7 @@ const LocationSelect = ({ locationData }) => {
   const handleChange = (e) => {
     router.push({
       pathname: router.pathname,
-      query: { location: e.target.value, ...router.query },
+      query: { ...router.query, location: e.target.value },
     });
   };
 
@@ -36,7 +36,6 @@ const LocationSelect = ({ locationData }) => {
                   style={{ padding: "0" }}
                 >
                   {/* TODO: change href to link to postings from that location */}
-
                   <a className={styles.locationLink}>
                     {location.city}, {location.state}
                   </a>
