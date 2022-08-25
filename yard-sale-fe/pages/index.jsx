@@ -5,9 +5,10 @@ export async function getServerSideProps(context) {
   //  assign locationFilter the query to filter for posts if a location is defined
   const location = context.query.location;
   const locationFilter = location
-    ? `&& location[0]->slug.current == "${location}"`
+    ? location == "all"
+      ? ""
+      : `&& location[0]->slug.current == "${location}"`
     : "";
-
   //  query to filter by category if one is selected
   const category = context.query.category;
   const categoryFilter = category

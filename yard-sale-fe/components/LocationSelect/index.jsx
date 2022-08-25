@@ -6,6 +6,7 @@ import styles from "./styles.module.scss";
 
 const LocationSelect = ({ locationData }) => {
   const router = useRouter();
+
   // user selection updates the query in the url
   const handleChange = (e) => {
     router.push({
@@ -14,12 +15,19 @@ const LocationSelect = ({ locationData }) => {
     });
   };
 
+  // true if router.query is an empty obj or contains "all" in location query
+  const locationAllOrEmpty =
+    Object.keys(router.query).length === 0 ||
+    (router.query.location && router.query.location.includes("all"));
+
   return (
     <div className={styles.outer}>
-      <h1 className={styles.prefixText}>Browsing local yard sales in</h1>
+      <h1 className={styles.prefixText}>
+        Browsing local yard sales {locationAllOrEmpty ? "" : "in"}
+      </h1>
       <FormControl style={{ margin: "0", padding: "0" }} variant="standard">
         <Select
-          value={router.query.location || "los-angeles"}
+          value={router.query.location || "all"}
           onChange={handleChange}
           displayEmpty
           inputProps={{ "aria-label": "Without label" }}
@@ -27,6 +35,9 @@ const LocationSelect = ({ locationData }) => {
           disableUnderline
           style={{ margin: "0", padding: "0" }}
         >
+          <MenuItem value={"all"} style={{ padding: "0" }}>
+            <a className={styles.locationLink}>Everywhere</a>
+          </MenuItem>
           {locationData.length > 0 &&
             locationData.map((location, i) => {
               return (

@@ -78,3 +78,8 @@ h6 {
   --lightText: rgb(118, 104, 97);
   --bg-color: rgb(230, 225, 222);
 }
+
+body {
+  height: 100%;
+  background-color: var(--bg-color);
+}
