@@ -1,0 +1,19 @@
+.categoryBtn {
+  border-radius: 8px;
+  margin: 5px;
+  width: 100px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  &:hover {
+    background: rgba(229, 166, 166, 0.3);
+  }
+}
+.active {
+  background: rgb(229, 166, 166);
+  &:hover {
+    background: rgb(229, 166, 166);
+  }
+}
