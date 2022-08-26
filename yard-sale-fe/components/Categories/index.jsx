@@ -1,4 +1,6 @@
 import { useRouter } from "next/router";
+import clsx from "clsx";
+import styles from "./styles.module.scss";
 
 const Categories = ({ data }) => {
   const router = useRouter();
@@ -17,7 +19,6 @@ const Categories = ({ data }) => {
       });
     }
   };
-
   return (
     <div>
       <h2>All categories</h2>
@@ -26,7 +27,15 @@ const Categories = ({ data }) => {
           data.map((category, i) => {
             return (
               <li key={i}>
-                <button onClick={handleChange} value={category.slug.current}>
+                <button
+                  onClick={handleChange}
+                  value={category.slug.current}
+                  className={clsx(
+                    styles.categoryBtn,
+                    category.slug.current === router.query.category &&
+                      styles.active
+                  )}
+                >
                   {category.title}
                 </button>
               </li>
