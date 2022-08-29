@@ -16,8 +16,14 @@
   gap: 24px;
   padding: 0;
   @media (min-width: 768px) {
-    flex-basis: 80%;
+    flex-basis: 85%;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(325px, 1fr));
+  }
+}
+
+.wrap {
+  @media (min-width: 768px) {
+    flex-basis: 15%;
   }
 }
