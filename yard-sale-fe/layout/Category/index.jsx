@@ -1,10 +1,12 @@
 import ListingTile from "../../components/ListingTile";
+import HomeIcon from "../../components/HomeIcon";
 
-const Category = ({ category }) => {
+const Category = ({ category, slug }) => {
   return (
     <div>
       <h2>
-        category: <span>{}</span>
+        <HomeIcon />
+        category: <span>{slug}</span>
       </h2>
       {category.length > 0 &&
         category.map((post, i) => {

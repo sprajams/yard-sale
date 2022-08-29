@@ -1,4 +1,5 @@
-import Link from "next/link";
+import HomeIcon from "../../components/HomeIcon";
+
 const Listing = ({ listing }) => {
   console.log(listing);
   const {
@@ -14,25 +15,7 @@ const Listing = ({ listing }) => {
   } = listing;
   return (
     <article>
-      <Link href="/">
-        <a>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={2}
-            stroke="currentColor"
-            className="w-5 h-5"
-            style={{ width: "35px" }}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M15.75 19.5L8.25 12l7.5-7.5"
-            />
-          </svg>
-        </a>
-      </Link>
+      <HomeIcon />
       <h1>{title}</h1>
       <div>${price}</div>
       <div>{location.city}</div>
