@@ -9,9 +9,17 @@ const LocationSelect = ({ locationData }) => {
 
   // user selection updates the query in the url
   const handleChange = (e) => {
+    // removes location if present
+    const { location, ...nextQuery } = router.query;
+    // add in selected location IF "all" is not selected
+    if (e.target.value !== "all") {
+      // add location
+      nextQuery.location = e.target.value;
+    }
+
     router.push({
       pathname: router.pathname,
-      query: { ...router.query, location: e.target.value },
+      query: nextQuery,
     });
   };
 
