@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -9,9 +10,21 @@ import { SORT_QUERY_PARAM_KEY, SORT_OPTIONS } from "../../constants/sorting";
 
 const SortSelect = () => {
   const [activeSort, setActiveSort] = useState("");
+
+  const router = useRouter();
+
   const handleChange = (e) => {
     setActiveSort(e.target.value);
+    // TODO: why does SORT_QUERY_PARAM_KEY result in undefined key
+    const { sort, ...nextQuery } = router.query;
+    nextQuery[SORT_QUERY_PARAM_KEY] = e.target.value;
+    router.push({
+      pathname: router.pathname,
+      query: nextQuery,
+    });
+    console.log(router.query[SORT_QUERY_PARAM_KEY]);
   };
+
   return (
     <Box sx={{ minWidth: 120 }} className={styles.outer}>
       <FormControl fullWidth>
