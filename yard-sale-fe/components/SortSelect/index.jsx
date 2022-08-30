@@ -5,6 +5,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useState } from "react";
 import styles from "./styles.module.scss";
+import { SORT_QUERY_PARAM_KEY, SORT_OPTIONS } from "../../constants/sorting";
 
 const SortSelect = () => {
   const [activeSort, setActiveSort] = useState("");
@@ -12,7 +13,7 @@ const SortSelect = () => {
     setActiveSort(e.target.value);
   };
   return (
-    <Box sx={{ minWidth: " 120px" }} className={styles.outer}>
+    <Box sx={{ minWidth: 120 }} className={styles.outer}>
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">Sort By</InputLabel>
         <Select
@@ -22,11 +23,13 @@ const SortSelect = () => {
           label="Sort By"
           onChange={handleChange}
         >
-          <MenuItem value={"new"}>Newest</MenuItem>
-          <MenuItem value={"low"}>Price: Low to High</MenuItem>
-          <MenuItem value={"high"}>Price: High to Low</MenuItem>
-          <MenuItem value={"A"}>A to Z</MenuItem>
-          <MenuItem value={"Z"}>Z to A</MenuItem>
+          {SORT_OPTIONS.map((option, i) => {
+            return (
+              <MenuItem key={i} value={option.value}>
+                {option.label}
+              </MenuItem>
+            );
+          })}
         </Select>
       </FormControl>
     </Box>
