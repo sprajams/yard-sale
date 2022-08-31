@@ -1,22 +1,26 @@
 import client from "../client";
 import Homepage from "../layout/Homepage";
+import { SORT_OPTIONS } from "../constants/sorting";
 
 export async function getServerSideProps(context) {
-  //  assign locationFilter the query to filter for posts if a location is defined
+  // assign locationFilter the query to filter for posts if a location is defined
   const location = context.query.location;
   const locationFilter = location
     ? location == "all"
       ? ""
       : `&& location[0]->slug.current == "${location}"`
     : "";
-  //  query to filter by category if one is selected
+  // query to filter by category if one is selected
   const category = context.query.category;
   const categoryFilter = category
     ? `&& "${category}" in categories[] -> slug.current`
     : "";
 
+  const sort = context.query.sort;
+  const sortData = SORT_OPTIONS.filter((option) => option.value === sort);
+  const sortFilter = sortData[0].groq;
   const listings = await client.fetch(
-    `*[_type == 'product' ${locationFilter} ${categoryFilter}] | order(_updatedAt desc) {
+    `*[_type == 'product' ${locationFilter} ${categoryFilter}] | order(${sortFilter}) {
       title,
       categories[] -> {
         title,

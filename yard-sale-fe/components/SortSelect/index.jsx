@@ -4,25 +4,22 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { useState } from "react";
 import styles from "./styles.module.scss";
 import { SORT_QUERY_PARAM_KEY, SORT_OPTIONS } from "../../constants/sorting";
 
 const SortSelect = () => {
-  const [activeSort, setActiveSort] = useState("");
-
   const router = useRouter();
 
   const handleChange = (e) => {
-    setActiveSort(e.target.value);
-    // TODO: why does SORT_QUERY_PARAM_KEY result in undefined key
-    const { sort, ...nextQuery } = router.query;
+    //allow targeting of router query excluding the sort property
+    const { [SORT_QUERY_PARAM_KEY]: currSortValue, ...nextQuery } =
+      router.query;
+    // add in the new sort property with selected sort value
     nextQuery[SORT_QUERY_PARAM_KEY] = e.target.value;
     router.push({
       pathname: router.pathname,
       query: nextQuery,
     });
-    console.log(router.query[SORT_QUERY_PARAM_KEY]);
   };
 
   return (
@@ -32,7 +29,7 @@ const SortSelect = () => {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={activeSort}
+          value={router.query[SORT_QUERY_PARAM_KEY]} // keep track of value with router query
           label="Sort By"
           onChange={handleChange}
         >
