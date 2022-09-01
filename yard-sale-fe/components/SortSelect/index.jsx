@@ -15,7 +15,8 @@ const SortSelect = () => {
     const { [SORT_QUERY_PARAM_KEY]: currSortValue, ...nextQuery } =
       router.query;
     // add in the new sort property with selected sort value
-    nextQuery[SORT_QUERY_PARAM_KEY] = e.target.value;
+    if (e.target.value !== "new")
+      nextQuery[SORT_QUERY_PARAM_KEY] = e.target.value;
     router.push({
       pathname: router.pathname,
       query: nextQuery,

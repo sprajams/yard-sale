@@ -6,19 +6,20 @@ export async function getServerSideProps(context) {
   // assign locationFilter the query to filter for posts if a location is defined
   const location = context.query.location;
   const locationFilter = location
-    ? location == "all"
-      ? ""
-      : `&& location[0]->slug.current == "${location}"`
+    ? `&& location[0]->slug.current == "${location}"`
     : "";
+
   // query to filter by category if one is selected
   const category = context.query.category;
   const categoryFilter = category
     ? `&& "${category}" in categories[] -> slug.current`
     : "";
 
+  //filter for selected sort, default to new
   const sort = context.query.sort;
-  const sortData = SORT_OPTIONS.filter((option) => option.value === sort);
-  const sortFilter = sortData[0].groq;
+  const sortData = SORT_OPTIONS.filter((option) => option.value === sort); // return array of the targeted object
+  const sortFilter = sortData.length > 0 ? sortData[0].groq : "new"; // sort by new has no query param, so sortData arr is empty
+
   const listings = await client.fetch(
     `*[_type == 'product' ${locationFilter} ${categoryFilter}] | order(${sortFilter}) {
       title,
