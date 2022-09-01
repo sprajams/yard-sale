@@ -1,0 +1,39 @@
+.inner {
+  display: flex;
+  list-style: none;
+  justify-content: space-between;
+  padding: 8px;
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: var(--secondary);
+}
+.logoTextWrap {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.23rem;
+}
+.logoTextSmall {
+  color: var(--lightText);
+  font-size: 1.65rem;
+  letter-spacing: 0.01rem;
+}
+.cartWrap {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  color: var(--lightText);
+}
+.cartNum {
+  position: absolute;
+  font-size: 0.8rem;
+  width: 100%;
+  height: 100%;
+  padding-top: 8px;
+  top: 0;
+  left: 0;
+  color: var(--secondary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
