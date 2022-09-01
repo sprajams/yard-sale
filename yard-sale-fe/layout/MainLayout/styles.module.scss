@@ -1,0 +1,8 @@
+.outer {
+  padding: 24px;
+  background-color: var(--bg-color);
+  height: 100%;
+  @media (min-width: 768px) {
+    padding: 24px 96px;
+  }
+}
