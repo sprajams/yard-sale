@@ -7,6 +7,11 @@
   font-weight: 600;
   color: var(--secondary);
 }
+.linkTag {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
 .logoTextWrap {
   display: flex;
   flex-direction: column;
@@ -21,7 +26,6 @@
   position: relative;
   width: 36px;
   height: 36px;
-  cursor: pointer;
   color: var(--lightText);
 }
 .cartNum {
