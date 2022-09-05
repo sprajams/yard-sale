@@ -1,7 +1,12 @@
 import Link from "next/link";
 import styles from "./styles.module.scss";
-
+import { useCartContext } from "../../contexts/CartContext";
 const ListingTile = ({ data }) => {
+  const cartContext = useCartContext();
+  const addItem = () => {
+    cartContext.addToCart(data);
+  };
+
   const { title, location, image, slug, price, updatedTime } = data;
   return (
     //clicking on a listing tile will link to PDP with the correct route
@@ -23,7 +28,6 @@ const ListingTile = ({ data }) => {
           />
         </svg>
       </div>
-
       <Link href="/product/[slug]" as={`/product/${slug}`}>
         <a className={styles.link}>
           <div className={styles.imgWrap}>
@@ -43,6 +47,10 @@ const ListingTile = ({ data }) => {
           </div>
         </a>
       </Link>
+      <div>
+        <button onClick={addItem}>+</button>
+        <button onClick={cartContext.removeFromCart}>-</button>
+      </div>
     </div>
   );
 };

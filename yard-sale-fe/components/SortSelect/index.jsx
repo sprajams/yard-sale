@@ -30,7 +30,7 @@ const SortSelect = () => {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={router.query[SORT_QUERY_PARAM_KEY]} // keep track of value with router query
+          value={router.query[SORT_QUERY_PARAM_KEY] || "new"} // keep track of value with router query
           label="Sort By"
           onChange={handleChange}
         >
