@@ -2,11 +2,10 @@ import Link from "next/link";
 import styles from "./styles.module.scss";
 import { useCartContext } from "../../contexts/CartContext";
 const ListingTile = ({ data }) => {
-  const cartContext = useCartContext();
+  const { addToCart } = useCartContext();
   const addItem = () => {
-    cartContext.addToCart(data);
+    addToCart(data.id, 1);
   };
-
   const { title, location, image, slug, price, updatedTime } = data;
   return (
     //clicking on a listing tile will link to PDP with the correct route
@@ -49,7 +48,7 @@ const ListingTile = ({ data }) => {
       </Link>
       <div>
         <button onClick={addItem}>+</button>
-        <button onClick={cartContext.removeFromCart}>-</button>
+        <button>-</button>
       </div>
     </div>
   );

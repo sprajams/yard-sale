@@ -4,12 +4,25 @@ const CartContext = createContext();
 
 export function CartWrapper({ children }) {
   const [cartItems, setCartItems] = useState([]);
-  const addToCart = (data) => {
-    setCartItems((prev) => [...prev, data]);
+  const addToCart = (id, quantity) => {
+    // find index of target id
+    const itemIndex = cartItems.findIndex((item) => {
+      return item.id === id;
+    });
+    if (itemIndex >= 0) {
+      // if this id alreay exists ... increase the value by 1
+      setCartItems((prev) => {
+        const modified = [...prev];
+        modified[itemIndex].quantity += quantity;
+        return modified;
+      });
+    }
+    // if index is not found, add new id and quantity
+    else {
+      setCartItems((prev) => [...prev, { id, quantity }]);
+    }
   };
-  //   const removeFromCart = (data) => {
-  //     setCartNum(cartNum--);
-  //   };
+
   return (
     <CartContext.Provider value={{ addToCart, cartItems }}>
       {children}

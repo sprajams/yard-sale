@@ -22,6 +22,7 @@ export async function getServerSideProps(context) {
 
   const listings = await client.fetch(
     `*[_type == 'product' ${locationFilter} ${categoryFilter}] | order(${sortFilter}) {
+      'id': _id,
       title,
       categories[] -> {
         title,
