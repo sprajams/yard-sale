@@ -23,8 +23,15 @@ export function CartWrapper({ children }) {
     }
   };
 
+  // create array of quantities
+  const quantities = cartItems.map((item) => item.quantity);
+  // sum array for total number of items in cart
+  const cartNum =
+    quantities.length > 0 &&
+    quantities.reduce((prev, current) => prev + current, 0);
+
   return (
-    <CartContext.Provider value={{ addToCart, cartItems }}>
+    <CartContext.Provider value={{ addToCart, cartItems, cartNum }}>
       {children}
     </CartContext.Provider>
   );
