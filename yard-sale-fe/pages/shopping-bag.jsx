@@ -1,16 +1,18 @@
-import { useCartContext } from "../contexts/CartContext";
+import client from "../client";
+import ShoppingBag from "../layout/Cart";
 
-const ShoppingBag = () => {
-  const { cartItems } = useCartContext();
-  console.log(cartItems);
-  return (
-    <>
-      <h3>shopping</h3>
-      {cartItems.map((item, i) => {
-        return <div key={i}>{item.title}</div>;
-      })}
-    </>
+export async function getServerSideProps() {
+  const bag = await client.fetch(
+    `*[_type == 'product'] {
+    'id': _id,
+    title,
+    price,
+  }`
   );
-};
-
+  return {
+    props: {
+      bag,
+    },
+  };
+}
 export default ShoppingBag;
