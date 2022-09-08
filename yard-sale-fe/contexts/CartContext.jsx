@@ -1,8 +1,11 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
+import { useCookies } from "react-cookie";
 
+const CART_ITEMS_COOKIE_KEY = "cartItems";
 const CartContext = createContext();
 
 export function CartWrapper({ children }) {
+  const [cookies, setCookies] = useCookies([CART_ITEMS_COOKIE_KEY]);
   const [cartItems, setCartItems] = useState([]);
   const addToCart = (id, quantity) => {
     // find index of target id
@@ -22,13 +25,23 @@ export function CartWrapper({ children }) {
       setCartItems((prev) => [...prev, { id, quantity }]);
     }
   };
-
   // create array of quantities
   const quantities = cartItems.map((item) => item.quantity);
   // sum array for total number of items in cart
   const cartNum =
     quantities.length > 0 &&
     quantities.reduce((prev, current) => prev + current, 0);
+
+  // update cookies when items in cart change
+  useEffect(() => {
+    setCookies(CART_ITEMS_COOKIE_KEY, cartItems);
+  }, [cartItems]);
+
+  // run once to rehydrate cookie value
+  // TODO: what happens if cookie undefined?
+  useEffect(() => {
+    setCartItems(cookies[CART_ITEMS_COOKIE_KEY]);
+  }, []);
 
   return (
     <CartContext.Provider value={{ addToCart, cartItems, cartNum }}>
