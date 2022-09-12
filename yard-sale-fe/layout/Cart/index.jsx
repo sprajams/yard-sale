@@ -1,10 +1,8 @@
 import { useCartContext } from "../../contexts/CartContext";
 import CartItem from "../../components/CartItem";
-import { useEffect } from "react";
 
 const ShoppingBag = ({ bag }) => {
   const { cartItems } = useCartContext();
-
   return (
     <>
       <h3>shopping</h3>
@@ -13,7 +11,7 @@ const ShoppingBag = ({ bag }) => {
           {cartItems.map((item, i) => {
             return (
               <li key={i}>
-                <CartItem itemData={item} />
+                <CartItem itemData={item} bagData={bag[i]} />
               </li>
             );
           })}
