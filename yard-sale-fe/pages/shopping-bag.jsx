@@ -10,6 +10,7 @@ export async function getServerSideProps(context) {
     title,
     'image': images[0].asset -> url,
     price,
+    'slug': slug.current,
   }`;
 
   const bag = await client.fetch(cookieQuery, { ids: cookiesIDs });
