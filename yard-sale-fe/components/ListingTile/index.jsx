@@ -2,9 +2,9 @@ import Link from "next/link";
 import styles from "./styles.module.scss";
 import { useCartContext } from "../../contexts/CartContext";
 const ListingTile = ({ data }) => {
-  const { addToCart } = useCartContext();
+  const { modifyCart } = useCartContext();
   const addItem = () => {
-    addToCart(data.id, 1);
+    modifyCart(data.id, 1);
   };
   const { title, location, image, slug, price, updatedTime } = data;
   return (

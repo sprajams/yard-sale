@@ -5,11 +5,24 @@ import Link from "next/link";
 const CartItem = ({ bagData }) => {
   const router = useRouter();
 
-  const { removeFromCart, cartItems } = useCartContext();
+  const { removeFromCart, cartItems, modifyCart } = useCartContext();
   const { image, price, title, id, slug } = bagData;
   const handleRemove = () => {
     removeFromCart(id);
     router.reload(); // force page reload to fetch data from server
+  };
+
+  const handleAddOne = () => {
+    modifyCart(id, 1);
+  };
+
+  const handleMinusOne = () => {
+    // prevent negative quantity, remove item if quantity would be 0
+    if (cartItems[indexCartItems].quantity > 1) {
+      modifyCart(id, -1);
+    } else {
+      handleRemove();
+    }
   };
 
   const indexCartItems = cartItems.findIndex((item) => {
@@ -35,7 +48,9 @@ const CartItem = ({ bagData }) => {
         qty:
         {cartItems[indexCartItems] && cartItems[indexCartItems].quantity}
       </span>
-      <button onClick={handleRemove}>Remove {id.slice(-4)}</button>
+      <button onClick={handleRemove}>Remove</button>
+      <button onClick={handleAddOne}>+</button>
+      <button onClick={handleMinusOne}>-</button>
     </div>
   );
 };

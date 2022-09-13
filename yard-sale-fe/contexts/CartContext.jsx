@@ -7,8 +7,9 @@ const CartContext = createContext();
 export function CartWrapper({ children }) {
   const [cookies, setCookies] = useCookies([CART_ITEMS_COOKIE_KEY]);
   const [cartItems, setCartItems] = useState([]);
-  const addToCart = (id, quantity) => {
-    // find index of target id
+
+  const modifyCart = (id, quantity) => {
+    //   // find index of target id
     const itemIndex = cartItems.findIndex((item) => {
       return item.id === id;
     });
@@ -16,7 +17,9 @@ export function CartWrapper({ children }) {
       // if this id alreay exists ... increase the value by 1
       setCartItems((prev) => {
         const modified = [...prev];
-        modified[itemIndex].quantity += quantity;
+        if (modified[itemIndex].quantity >= 1) {
+          modified[itemIndex].quantity += quantity;
+        }
         return modified;
       });
     }
@@ -38,7 +41,6 @@ export function CartWrapper({ children }) {
     });
   };
 
-  console.log(cookies[CART_ITEMS_COOKIE_KEY], "cookies");
   // create array of quantities
   const quantities = cartItems.map((item) => item.quantity);
   // sum array for total number of items in cart
@@ -59,7 +61,15 @@ export function CartWrapper({ children }) {
 
   return (
     <CartContext.Provider
-      value={{ addToCart, cartItems, cartNum, removeFromCart, cookies }}
+      value={{
+        // addToCart,
+        cartItems,
+        cartNum,
+        removeFromCart,
+        cookies,
+        // minusOne,
+        modifyCart,
+      }}
     >
       {children}
     </CartContext.Provider>
