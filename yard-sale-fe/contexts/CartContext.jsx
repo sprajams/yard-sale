@@ -25,6 +25,20 @@ export function CartWrapper({ children }) {
       setCartItems((prev) => [...prev, { id, quantity }]);
     }
   };
+
+  const removeFromCart = (id) => {
+    // find index of target id
+    const itemIndex = cartItems.findIndex((item) => {
+      return item.id === id;
+    });
+    setCartItems((prev) => {
+      const modified = [...prev];
+      modified.splice(itemIndex, 1);
+      return modified;
+    });
+  };
+
+  console.log(cookies[CART_ITEMS_COOKIE_KEY], "cookies");
   // create array of quantities
   const quantities = cartItems.map((item) => item.quantity);
   // sum array for total number of items in cart
@@ -44,7 +58,9 @@ export function CartWrapper({ children }) {
   }, []);
 
   return (
-    <CartContext.Provider value={{ addToCart, cartItems, cartNum }}>
+    <CartContext.Provider
+      value={{ addToCart, cartItems, cartNum, removeFromCart, cookies }}
+    >
       {children}
     </CartContext.Provider>
   );

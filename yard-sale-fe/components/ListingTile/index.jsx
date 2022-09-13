@@ -47,8 +47,7 @@ const ListingTile = ({ data }) => {
         </a>
       </Link>
       <div>
-        <button onClick={addItem}>+</button>
-        <button>-</button>
+        <button onClick={addItem}>Add to cart</button>
       </div>
     </div>
   );
